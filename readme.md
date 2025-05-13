@@ -35,3 +35,16 @@ Make sure Python and Pygame are installed:
 
 ```bash
 pip install pygame
+
+<!-- Started v2.4-dev branch -->
+
+## 🛠 v2.4-dev Progress Log
+
+> This section tracks new features and updates added during v2.4 development.
+
+- [ X ] Added `v2.4-dev` branch for upcoming features
+- [ ] Set up sprite loading system
+- [ ] Designed and implemented car sprite animation
+- [ ] Added sound effects (jump, crash)
+- [ ] Created main menu screen
+- [ ] Added pause and resume functionality

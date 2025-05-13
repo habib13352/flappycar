@@ -28,7 +28,7 @@ class HUD:
             screen.blit(rendered, (x, settings.HEIGHT // 2 - rendered.get_height() // 2))
 
     def draw_highscores(self, screen, scores):
-        title = settings.LARGE_FONT.render("🏆 HIGH SCORES", True, settings.WHITE)
+        title = settings.LARGE_FONT.render("HIGH SCORES", True, settings.WHITE)
         screen.blit(title, (settings.WIDTH // 2 - title.get_width() // 2, 100))
         bg = pygame.Surface((settings.WIDTH - 80, settings.MAX_SCORES * 40 + 20))
         bg.fill(settings.GREY)
