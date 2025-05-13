@@ -18,7 +18,6 @@ This version (`v2.3`) introduces:
 - All code separated into clean modules:
   - `game.py`: Game loop and input
   - `logic.py`: Movement, pipe creation, collisions
-  - `ui.py`: Drawing car, pipes, score, name input
 - Highscore data stored in `highscores.json` (not tracked in Git)
 
 ---
