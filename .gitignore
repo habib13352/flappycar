@@ -1,0 +1,13 @@
+# Python compiled files
+__pycache__/
+*.pyc
+
+# Highscore file (optional, user-specific)
+highscores.json
+highscores.txt
+
+# VS Code settings (not need yet)
+.vscode/
+
+# MacOS system files (?)
+.DS_Store
