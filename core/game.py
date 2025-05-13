@@ -65,7 +65,7 @@ class Game:
         for pipe in self.pipes:
             pipe.update()
 
-        # Remove off‐screen
+        # Remove off‐screen pipes
         self.pipes = [p for p in self.pipes if not p.is_off_screen()]
 
         # Scoring
@@ -76,13 +76,11 @@ class Game:
                 if self.score % 5 == 0:
                     self.score_flash_timer = 15
 
-        # 🔄 LINEAR SPEED SCALING: +0.5 speed per 5 points
+        # Speed scaling and gap adjustment
         settings.PIPE_SPEED = 3 + 0.5 * (self.score // 5)
-
-        # Gap shrinks linearly, clamped to 120
         self.pipe_gap = max(120, settings.BASE_PIPE_GAP - self.score * 2)
 
-        # 🚏 Distance‐based spawning to keep density constant
+        # Pipe spawning based on distance
         self.distance_since_last_spawn += settings.PIPE_SPEED
         if self.distance_since_last_spawn >= settings.PIPE_SPACING_PIXELS:
             self.pipes.append(PipePair(settings.WIDTH, self.pipe_gap))
@@ -92,7 +90,7 @@ class Game:
         if self.score_flash_timer > 0:
             self.score_flash_timer -= 1
 
-        # Collision with pipes
+        # Collision detection
         for pipe in self.pipes:
             if self.car.rect.colliderect(pipe.top) or self.car.rect.colliderect(pipe.bottom):
                 self.game_active = False
@@ -100,13 +98,12 @@ class Game:
                     self.entering_name = True
                 return
 
-        # Collision with floor/ceiling
         if self.car.rect.top <= 0 or self.car.rect.bottom >= settings.HEIGHT:
             self.game_active = False
             if utils.is_highscore(self.high_scores, self.score):
                 self.entering_name = True
 
-    def draw(self):
+    def draw(self, debug_mode=False):
         self.screen.fill(settings.SKY_BLUE)
 
         if self.waiting_to_start:
@@ -116,11 +113,11 @@ class Game:
             self.screen.blit(msg, (x, y))
 
         elif self.game_active:
-            self.car.draw(self.screen)
+            self.car.draw(self.screen, debug_mode)
             for pipe in self.pipes:
                 pipe.draw(self.screen)
 
-            # Score & speed display
+            # Score display
             color = settings.WHITE if self.score_flash_timer == 0 else settings.YELLOW
             score_text = settings.FONT.render(f"Score: {self.score}", True, color)
             speed_text = settings.SMALL_FONT.render(
@@ -129,11 +126,16 @@ class Game:
             self.screen.blit(score_text, (20, 20))
             self.screen.blit(speed_text, (20, 70))
 
-            # —— FPS display —— 
+            # FPS
             fps = int(self.clock.get_fps())
             fps_text = settings.SMALL_FONT.render(f"FPS: {fps}", True, settings.WHITE)
             fx = settings.WIDTH - fps_text.get_width() - 20
             self.screen.blit(fps_text, (fx, 20))
+
+            # Debug label
+            if debug_mode:
+                dbg_text = settings.SMALL_FONT.render("DEBUG MODE ON", True, (255, 0, 0))
+                self.screen.blit(dbg_text, (20, settings.HEIGHT - 40))
 
         elif self.entering_name:
             prompt = settings.FONT.render("ENTER YOUR INITIALS", True, settings.WHITE)
