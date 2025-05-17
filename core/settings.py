@@ -14,10 +14,10 @@ GREY = (50, 50, 50)
 
 # Pipe configuration
 PIPE_WIDTH = 70 # Set to 60 with pixel overlap of 6
-BASE_PIPE_GAP = 185
+BASE_PIPE_GAP = 190 # Set to 180
 PIPE_SPAWN_INTERVAL = 1500
-PIPE_SPACING_PIXELS = 320  # Used to calculate dynamic spawn timing
-PIPE_SPEED = 2  # Will be updated dynamically
+PIPE_SPACING_PIXELS = 420  # Used to calculate dynamic spawn timing (320)
+PIPE_SPEED = 2  # Will be updated dynamically (?)
 
 # Highscore limit
 MAX_SCORES = 10

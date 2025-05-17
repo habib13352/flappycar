@@ -42,7 +42,7 @@ class Game:
         self.entering_name = False
         self.name_entered = False
 
-        settings.PIPE_SPEED = 3
+        self.PIPE_SPEED = settings.PIPE_SPEED #this should be updated from settings/pipespeed
         self.distance_since_last_spawn = 0
 
         self.pipes.append(PipePair(settings.WIDTH, self.pipe_gap))
@@ -68,7 +68,7 @@ class Game:
                 if self.score % 5 == 0:
                     self.score_flash_timer = 15
 
-        settings.PIPE_SPEED = 3 + 0.5 * (self.score // 5)
+        settings.PIPE_SPEED = self.PIPE_SPEED + 0.5 * (self.score // 5) #this should be updated from settings/pipespeed
         self.pipe_gap = max(120, settings.BASE_PIPE_GAP - self.score * 2)
 
         self.distance_since_last_spawn += settings.PIPE_SPEED
