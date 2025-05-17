@@ -9,15 +9,15 @@ class Car:
         self.movement = 0.0
 
         # Physics constants
-        self.gravity = 0.35
-        self.jump_strength = -7.5
-        self.max_fall_speed = 9
+        self.gravity = 0.37
+        self.jump_strength = -7.8
+        self.max_fall_speed = 9.5
 
-        # Sprite dimensions (looks right at 108x75)
-        self.width, self.height = 108, 75
+        # Sprite dimensions (looks right at 108x75) (nah thats streched try 1:1)
+        self.width, self.height = 108, 108
 
         # Load and scale pixel art sprite
-        sprite_path = os.path.join("assets", "car", "red_rx7.png")
+        sprite_path = os.path.join("assets", "car", "car4.png")
         self.base_image = pygame.image.load(sprite_path).convert_alpha()
         self.base_image = pygame.transform.scale(self.base_image, (self.width, self.height))
 

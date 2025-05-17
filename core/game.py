@@ -25,8 +25,6 @@ class Game:
         self.scored_pipes = []
 
         self.input_handler = InputHandler(self)
-
-        # Distance‐based spawn tracking
         self.distance_since_last_spawn = 0
 
     def reset(self):
@@ -44,11 +42,9 @@ class Game:
         self.entering_name = False
         self.name_entered = False
 
-        # Reset to base speed and spawn distance
         settings.PIPE_SPEED = 3
         self.distance_since_last_spawn = 0
 
-        # Spawn first pipe immediately
         self.pipes.append(PipePair(settings.WIDTH, self.pipe_gap))
 
     def handle_events(self, event):
@@ -58,17 +54,13 @@ class Game:
         if not self.game_active:
             return
 
-        # Move car
         self.car.update()
 
-        # Move pipes
         for pipe in self.pipes:
             pipe.update()
 
-        # Remove off‐screen pipes
         self.pipes = [p for p in self.pipes if not p.is_off_screen()]
 
-        # Scoring
         for pipe in self.pipes:
             if pipe.has_passed(self.car.rect):
                 self.score += 1
@@ -76,23 +68,21 @@ class Game:
                 if self.score % 5 == 0:
                     self.score_flash_timer = 15
 
-        # Speed scaling and gap adjustment
         settings.PIPE_SPEED = 3 + 0.5 * (self.score // 5)
         self.pipe_gap = max(120, settings.BASE_PIPE_GAP - self.score * 2)
 
-        # Pipe spawning based on distance
         self.distance_since_last_spawn += settings.PIPE_SPEED
         if self.distance_since_last_spawn >= settings.PIPE_SPACING_PIXELS:
             self.pipes.append(PipePair(settings.WIDTH, self.pipe_gap))
             self.distance_since_last_spawn -= settings.PIPE_SPACING_PIXELS
 
-        # Flash timer
         if self.score_flash_timer > 0:
             self.score_flash_timer -= 1
 
-        # Collision detection
+        # Collision
         for pipe in self.pipes:
-            if self.car.rect.colliderect(pipe.top) or self.car.rect.colliderect(pipe.bottom):
+            if self.car.rect.colliderect(pipe.top_rect) or \
+               self.car.rect.colliderect(pipe.bottom_rect):
                 self.game_active = False
                 if utils.is_highscore(self.high_scores, self.score):
                     self.entering_name = True
@@ -115,9 +105,8 @@ class Game:
         elif self.game_active:
             self.car.draw(self.screen, debug_mode)
             for pipe in self.pipes:
-                pipe.draw(self.screen)
+                pipe.draw(self.screen, debug_mode)
 
-            # Score display
             color = settings.WHITE if self.score_flash_timer == 0 else settings.YELLOW
             score_text = settings.FONT.render(f"Score: {self.score}", True, color)
             speed_text = settings.SMALL_FONT.render(
@@ -126,13 +115,11 @@ class Game:
             self.screen.blit(score_text, (20, 20))
             self.screen.blit(speed_text, (20, 70))
 
-            # FPS
             fps = int(self.clock.get_fps())
             fps_text = settings.SMALL_FONT.render(f"FPS: {fps}", True, settings.WHITE)
             fx = settings.WIDTH - fps_text.get_width() - 20
             self.screen.blit(fps_text, (fx, 20))
 
-            # Debug label
             if debug_mode:
                 dbg_text = settings.SMALL_FONT.render("DEBUG MODE ON", True, (255, 0, 0))
                 self.screen.blit(dbg_text, (20, settings.HEIGHT - 40))
@@ -151,7 +138,7 @@ class Game:
 
         else:
             game_over = settings.FONT.render("Game Over", True, settings.WHITE)
-            restart = settings.SMALL_FONT.render("Press SPACE to Restart", True, settings.WHITE)
+            restart  = settings.SMALL_FONT.render("Press SPACE to Restart", True, settings.WHITE)
             self.screen.blit(game_over, (settings.WIDTH//2 - game_over.get_width()//2, 50))
             self.screen.blit(restart, (settings.WIDTH//2 - restart.get_width()//2, settings.HEIGHT - 80))
 
