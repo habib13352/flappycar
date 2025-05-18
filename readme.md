@@ -9,9 +9,11 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 
 > Ongoing updates and feature additions for version 2.4
 
+- ✅ Tweaked physics and scale for better playability
 - ✅ Integrated new pixel art **Mazda RX-7 style sprite** (side view, red)
 - ✅ Scaled sprite with **transparent background** 
-- ✅ Replaced old rectangle car with rotating sprite
+- ✅ Integrated new pixel art **Classic style pipes** (top  bottom shared sprite, green)
+- ✅ Tiled and cropped automaticlly to preserve resolution and size
 - ✅ Added toggleable **Dev Debug Mode** using the `D` key
 - ✅ Visualized the car's **collision box** (red outline)
 - ✅ Fine-tuned hitbox for accurate gameplay feel
