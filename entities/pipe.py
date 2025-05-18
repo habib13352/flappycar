@@ -9,7 +9,7 @@ class PipePair:
     PIPE_TOP_CAP   = None     # flipped top cap
     PIPE_BODY_IMG  = None     # body tile
     CAP_HEIGHT     = 32       # your measured cap slice
-    OVERLAP        = 8        # body‐tile overlap (3)
+    OVERLAP        = 9        # body‐tile overlap (3)
 
     def __init__(self, x, gap):
         # 1) Load, crop & scale once
