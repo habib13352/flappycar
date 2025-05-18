@@ -14,6 +14,13 @@ class Game:
         self.score = 0
         self.high_scores = utils.load_highscores()
 
+        # store the original pipe speed so we can restore it on reset
+        self.base_pipe_speed = settings.PIPE_SPEED
+        self.PIPE_SPEED = self.base_pipe_speed
+
+        # god-mode flag
+        self.god_mode = False
+
         self.waiting_to_start = True
         self.game_active = False
         self.entering_name = False
@@ -42,12 +49,20 @@ class Game:
         self.entering_name = False
         self.name_entered = False
 
-        self.PIPE_SPEED = settings.PIPE_SPEED #this should be updated from settings/pipespeed
-        self.distance_since_last_spawn = 0
+        # reset both instance and global pipe speed
+        self.PIPE_SPEED = self.base_pipe_speed
+        settings.PIPE_SPEED = self.base_pipe_speed
 
+        # turn god-mode off on restart
+        self.god_mode = False
+
+        self.distance_since_last_spawn = 0
         self.pipes.append(PipePair(settings.WIDTH, self.pipe_gap))
 
     def handle_events(self, event):
+        # toggle god-mode on G press
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_g:
+            self.god_mode = not self.god_mode
         return self.input_handler.handle_event(event)
 
     def update(self):
@@ -55,7 +70,6 @@ class Game:
             return
 
         self.car.update()
-
         for pipe in self.pipes:
             pipe.update()
 
@@ -68,7 +82,7 @@ class Game:
                 if self.score % 5 == 0:
                     self.score_flash_timer = 15
 
-        settings.PIPE_SPEED = self.PIPE_SPEED + 0.5 * (self.score // 5) #this should be updated from settings/pipespeed
+        settings.PIPE_SPEED = self.PIPE_SPEED + 0.5 * (self.score // 5)
         self.pipe_gap = max(120, settings.BASE_PIPE_GAP - self.score * 2)
 
         self.distance_since_last_spawn += settings.PIPE_SPEED
@@ -79,19 +93,19 @@ class Game:
         if self.score_flash_timer > 0:
             self.score_flash_timer -= 1
 
-        # Collision
-        for pipe in self.pipes:
-            if self.car.rect.colliderect(pipe.top_rect) or \
-               self.car.rect.colliderect(pipe.bottom_rect):
+        if not self.god_mode:
+            for pipe in self.pipes:
+                if self.car.rect.colliderect(pipe.top_rect) or \
+                   self.car.rect.colliderect(pipe.bottom_rect):
+                    self.game_active = False
+                    if utils.is_highscore(self.high_scores, self.score):
+                        self.entering_name = True
+                    return
+
+            if self.car.rect.top <= 0 or self.car.rect.bottom >= settings.HEIGHT:
                 self.game_active = False
                 if utils.is_highscore(self.high_scores, self.score):
                     self.entering_name = True
-                return
-
-        if self.car.rect.top <= 0 or self.car.rect.bottom >= settings.HEIGHT:
-            self.game_active = False
-            if utils.is_highscore(self.high_scores, self.score):
-                self.entering_name = True
 
     def draw(self, debug_mode=False):
         self.screen.fill(settings.SKY_BLUE)
@@ -103,10 +117,12 @@ class Game:
             self.screen.blit(msg, (x, y))
 
         elif self.game_active:
+            # draw game objects
             self.car.draw(self.screen, debug_mode)
             for pipe in self.pipes:
                 pipe.draw(self.screen, debug_mode)
 
+            # draw UI overlays
             color = settings.WHITE if self.score_flash_timer == 0 else settings.YELLOW
             score_text = settings.FONT.render(f"Score: {self.score}", True, color)
             speed_text = settings.SMALL_FONT.render(
@@ -116,31 +132,39 @@ class Game:
             self.screen.blit(speed_text, (20, 70))
 
             fps = int(self.clock.get_fps())
-            fps_text = settings.SMALL_FONT.render(f"FPS: {fps}", True, settings.WHITE)
+            fps_text = settings.SMALL_FONT.render(f"FPS: {fps}", True, settings.LIGHT_GREEN)
             fx = settings.WIDTH - fps_text.get_width() - 20
             self.screen.blit(fps_text, (fx, 20))
 
+            # now draw god-mode on top of everything
+            if self.god_mode:
+                god_text = settings.SMALL_FONT.render("GOD MODE", True, settings.YELLOW)
+                gx = settings.WIDTH - god_text.get_width() - 20
+                # choose a Y that doesn’t conflict with FPS text (e.g. 120)
+                self.screen.blit(god_text, (gx, 50))
+
             if debug_mode:
-                dbg_text = settings.SMALL_FONT.render("DEBUG MODE ON", True, (255, 0, 0))
-                self.screen.blit(dbg_text, (20, settings.HEIGHT - 40))
+                dbg = settings.SMALL_FONT.render("DEBUG MODE ON", True, (255, 0, 0))
+                self.screen.blit(dbg, (20, settings.HEIGHT - 40))
 
         elif self.entering_name:
             prompt = settings.FONT.render("ENTER YOUR INITIALS", True, settings.WHITE)
             px = settings.WIDTH//2 - prompt.get_width()//2
             self.screen.blit(prompt, (px, settings.HEIGHT//2 - 120))
             for i in range(3):
-                char = self.initials[i] if self.initials[i] != '-' else '-'
-                color = settings.YELLOW if i == self.current_char_index else settings.WHITE
-                rendered = settings.LARGE_FONT.render(char, True, color)
+                ch = self.initials[i] if self.initials[i] != '-' else '-'
+                col = settings.YELLOW if i == self.current_char_index else settings.WHITE
+                rend = settings.LARGE_FONT.render(ch, True, col)
                 x = settings.WIDTH//2 - 80 + i*60
-                y = settings.HEIGHT//2 - rendered.get_height()//2
-                self.screen.blit(rendered, (x, y))
+                y = settings.HEIGHT//2 - rend.get_height()//2
+                self.screen.blit(rend, (x, y))
 
         else:
-            game_over = settings.FONT.render("Game Over", True, settings.WHITE)
-            restart  = settings.SMALL_FONT.render("Press SPACE to Restart", True, settings.WHITE)
-            self.screen.blit(game_over, (settings.WIDTH//2 - game_over.get_width()//2, 50))
-            self.screen.blit(restart, (settings.WIDTH//2 - restart.get_width()//2, settings.HEIGHT - 80))
+            # game-over / high-score screen
+            over = settings.FONT.render("Game Over", True, settings.WHITE)
+            res  = settings.SMALL_FONT.render("Press SPACE to Restart", True, settings.WHITE)
+            self.screen.blit(over, (settings.WIDTH//2 - over.get_width()//2, 50))
+            self.screen.blit(res,  (settings.WIDTH//2 - res.get_width()//2, settings.HEIGHT - 80))
 
             title = settings.LARGE_FONT.render("🏆 HIGH SCORES", True, settings.WHITE)
             tx = settings.WIDTH//2 - title.get_width()//2
@@ -150,7 +174,9 @@ class Game:
             bg.fill(settings.GREY)
             self.screen.blit(bg, (40, 180))
             for idx, entry in enumerate(self.high_scores[:settings.MAX_SCORES]):
-                lbl = settings.FONT.render(f"{idx+1}. {entry['name']} - {entry['score']}", True, settings.WHITE)
+                lbl = settings.FONT.render(
+                    f"{idx+1}. {entry['name']} - {entry['score']}", True, settings.WHITE
+                )
                 lx = settings.WIDTH//2 - lbl.get_width()//2
                 ly = 200 + idx*40
                 self.screen.blit(lbl, (lx, ly))
