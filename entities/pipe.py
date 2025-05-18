@@ -35,12 +35,16 @@ class PipePair:
             PipePair.PIPE_BODY_IMG  = full.subsurface((0, ch, w, h - ch)).copy()
 
         # 2) Gap & position
-        if settings.PIPE_SPEED < 6:
-            min_gap, pct = 120, 0.06
+        if settings.PIPE_SPEED < 4:
+            min_gap, pct = 170, 0.06
+        elif settings.PIPE_SPEED < 5:
+            min_gap, pct = 160, 0.06
+        elif settings.PIPE_SPEED < 6:
+            min_gap, pct = 150, 0.08
         elif settings.PIPE_SPEED < 8:
-            min_gap, pct = 110, 0.09
+            min_gap, pct = 150, 0.09    
         else:
-            min_gap, pct = 100, 0.12
+            min_gap, pct = 150, 0.09
 
         self.base_gap    = max(min_gap, gap)
         variation        = int(self.base_gap * pct)

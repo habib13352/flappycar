@@ -10,8 +10,8 @@ class Car:
 
         # Physics constants
         self.gravity = 0.37
-        self.jump_strength = -7.8
-        self.max_fall_speed = 9.5
+        self.jump_strength = -8.4
+        self.max_fall_speed = 9.8
 
         # Sprite dimensions (looks right at 108x75) (nah thats streched try 1:1)
         self.width, self.height = 108, 108
@@ -22,11 +22,11 @@ class Car:
         self.base_image = pygame.transform.scale(self.base_image, (self.width, self.height))
 
         # Base rect (use smaller hitbox if needed)
-        center_x, center_y = 100, int(self.y)
+        center_x, center_y = 100, int(self.y) #try different val for center_x
 
         # Adjust hitbox here if needed
-        hitbox_width = int(self.width * 0.95)   # 95% of full width
-        hitbox_height = int(self.height * 0.65)  # 65% of full height
+        hitbox_width = int(self.width * 0.76)   # 95% of full width #.8 is fair
+        hitbox_height = int(self.height * 0.37)  # 65% of full height #.4 is fair
 
         self.rect = pygame.Rect(0, 0, hitbox_width, hitbox_height)
         self.rect.center = (center_x, center_y)
