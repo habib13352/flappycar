@@ -3,11 +3,13 @@ from core import settings, utils
 from core.input_handler import InputHandler
 from entities.car import Car
 from entities.pipe import PipePair
+from entities.background import Background
 
 class Game:
     def __init__(self, screen):
         self.screen = screen
         self.clock = pygame.time.Clock()
+        self.background = Background()
         self.car = Car()
         self.pipes = []
         self.pipe_gap = settings.BASE_PIPE_GAP
@@ -108,7 +110,10 @@ class Game:
                     self.entering_name = True
 
     def draw(self, debug_mode=False):
-        self.screen.fill(settings.SKY_BLUE)
+        #self.screen.fill(settings.SKY_BLUE)
+
+        # draw  layered background
+        self.background.draw(self.screen)
 
         if self.waiting_to_start:
             msg = settings.FONT.render("Press SPACE to Start", True, settings.WHITE)
