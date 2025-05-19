@@ -25,13 +25,14 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 > This section tracks new features and updates added during v2.4 development.
 
 - [x] Added `v2.4-dev` branch for upcoming features
-- [ ] Set up sprite loading system  
+- [x] Set up sprite loading system  
   - [x] For the car  
   - [x] For the pipes  (this was harder than expected)
-  - [ ] For the background
+  - [x] For the background
 - [ ] Designed and implemented car sprite animation  
   - [x] Basic rotation on jump and fall
 - [ ] Added sound effects (jump, crash)
+- [ ] Added background music
 - [ ] Created main menu screen
 - [ ] Added pause and resume functionality
 
