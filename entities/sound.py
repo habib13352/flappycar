@@ -1,17 +1,16 @@
 import pygame
-import os
 
 # Initialize the mixer
 pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 
 # Load sound effects
-flap_snd  = pygame.mixer.Sound("assets/snd/flap.mp3")
-death_snd = pygame.mixer.Sound("assets/snd/death.mp3")
+flap_snd  = pygame.mixer.Sound("assets/snd/flap.wav")
+death_snd = pygame.mixer.Sound("assets/snd/death.wav")
 
 # Play background music (looped if loop=True)
 def play_music(loop=True):
     pygame.mixer.music.load("assets/snd/music.mp3")
-    pygame.mixer.music.set_volume(0.5)  # optional
+    pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1 if loop else 0)
 
 # Stop music
