@@ -17,7 +17,7 @@ class Car:
         self.width, self.height = 108, 108
 
         # Load and scale pixel art sprite
-        sprite_path = os.path.join("assets", "car", "car4.png")
+        sprite_path = os.path.join("assets", "sprites", "car", "car4.png")
         self.base_image = pygame.image.load(sprite_path).convert_alpha()
         self.base_image = pygame.transform.scale(self.base_image, (self.width, self.height))
 

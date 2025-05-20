@@ -15,7 +15,7 @@ class PipePair:
         # 1) Load, crop & scale once
         if PipePair.PIPE_BODY_IMG is None:
             raw = pygame.image.load(
-                os.path.join("assets", "pipe", "pipe3.png")
+                os.path.join("assets", "sprites", "pipe", "pipe3.png")
             ).convert_alpha()
 
             # Crop transparent border

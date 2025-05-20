@@ -4,6 +4,7 @@ from core.input_handler import InputHandler
 from entities.car import Car
 from entities.pipe import PipePair
 from entities.background import Background
+#from entities import sound
 
 class Game:
     def __init__(self, screen):
@@ -37,6 +38,7 @@ class Game:
         self.distance_since_last_spawn = 0
 
     def reset(self):
+        #sound.play_music() # play bkg music
         self.car = Car()
         self.pipes.clear()
         self.scored_pipes.clear()
