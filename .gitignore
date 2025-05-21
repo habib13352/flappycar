@@ -9,5 +9,8 @@ highscores.txt
 # VS Code settings (not need yet)
 .vscode/
 
+# Pipe.png debug script
+debug_pipe_cap.py
+
 # MacOS system files (for ur benifit)
 .DS_Store

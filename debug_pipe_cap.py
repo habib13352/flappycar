@@ -1,5 +1,3 @@
-# debug_pipe_cap.py
-
 import pygame
 import os
 from core import settings
@@ -12,7 +10,7 @@ def main():
     # needed so convert_alpha() works
     pygame.display.set_mode((1, 1))
 
-    sprite_path = os.path.join("assets", "pipe", "pipe3.png")
+    sprite_path = os.path.join("assets", "sprites", "pipe", "pipe3.png")
     raw = pygame.image.load(sprite_path).convert_alpha()
     print("Raw image size:         ", raw.get_size())
 
