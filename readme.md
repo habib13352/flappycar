@@ -19,6 +19,7 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 - ✅ Fine-tuned hitbox for accurate gameplay feel
 - ✅ Refactored draw methods to support `debug_mode` flag cleanly
 - ✅ "DEBUG MODE ON" label in debug mode
+- ✅ Custom **Flapy Bird like skyline background** (blue gradient, 3 tone buidings, clouds)
 
 ## 🛠 v2.4-dev Progress CHECKLIST
 
@@ -31,14 +32,19 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
   - [x] For the background
 - [ ] Designed and implemented car sprite animation  
   - [x] Basic rotation on jump and fall
-- [ ] Added sound effects (jump, crash)
-- [ ] Added background music
+- [x] Add sound effects (jump, crash)
+- [x] Add background music
 - [ ] Created main menu screen
-- [ ] Added pause and resume functionality
+- [ ] Add pause and resume functionality
 
 ## Small Changes BIG Differences
+
 - Tweaked gravity and jump strength
 - Tweaked pipe scroll speed
 - Tweaked gap size
 - Tweaked pipe size
 - Tweaked car size and resolution
+
+- Added sound!
+
+- Sorted assets into folders
