@@ -21,6 +21,12 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 - ✅ "DEBUG MODE ON" label in debug mode
 - ✅ Custom **Flapy Bird like skyline background** (blue gradient, 3 tone buidings, clouds)
 
+## 🛠 Ongoing Bug Fixes / Improvments
+
+- ❌ collision box doesnt match top pipe closely enough
+- 🔧 collision box can be re-shaped to better fit the car sprite(s)
+
+
 ## 🛠 v2.4-dev Progress CHECKLIST
 
 > This section tracks new features and updates added during v2.4 development.
