@@ -9,7 +9,7 @@ class PipePair:
     PIPE_TOP_CAP   = None     # Flipped top cap (used for top pipe)
     PIPE_BODY_IMG  = None     # Repeating body tile
     CAP_HEIGHT     = 32       # Height of the pipe cap in pixels
-    OVERLAP        = 9        # Overlap between body tiles to avoid visual gaps
+    OVERLAP        = 3        # Overlap between body tiles to avoid visual gaps
 
     def __init__(self, x, gap):
         # === LOAD AND SLICE SPRITE ONLY ONCE ===
