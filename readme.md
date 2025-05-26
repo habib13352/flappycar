@@ -5,31 +5,6 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 
 ---
 
-## 🛠 v2.4-dev Progress Log
-
-> Ongoing updates and feature additions for version 2.4
-
-- ✅ Tweaked physics and scale for better playability
-- ✅ Integrated new pixel art **Mazda RX-7 style sprite** (side view, red)
-- ✅ Scaled sprite with **transparent background** 
-- ✅ Integrated new pixel art **Classic style pipes** (top  bottom shared sprite, green)
-- ✅ Tiled and cropped automaticlly to preserve resolution and size
-- ✅ Added toggleable **Dev Debug Mode** using the `D` key
-- ✅ Visualized the car's **collision box** (red outline)
-- ✅ Fine-tuned hitbox for accurate gameplay feel
-- ✅ Refactored draw methods to support `debug_mode` flag cleanly
-- ✅ "DEBUG MODE ON" label in debug mode
-- ✅ Custom **Flapy Bird like skyline background** (blue gradient, 3 tone buidings, clouds)
-
-## 🛠 Ongoing Bug Fixes / Improvments
-
-- ❌ collision box doesnt match top pipe closely enough
-- 🔧 collision box can be re-shaped to better fit the car sprite(s)
-- Additionally:
-    - edit pipe pair gen func to limit randomness
-    - limit max speed
-    - try different speed and pipe gaps
-
 ## 🛠 v2.4-dev Progress CHECKLIST
 
 > This section tracks new features and updates added during v2.4 development.
@@ -46,6 +21,35 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 - [ ] Created main menu screen
 - [ ] Add pause and resume functionality
 
+---
+
+## 🛠 v2.4-dev Progress Log
+
+> Ongoing updates and feature additions for version 2.4
+
+- ✅ Tweaked physics and scale for better playability
+- ✅ Integrated new pixel art **Mazda RX-7 style sprite** (side view, red)
+- ✅ Scaled sprite with **transparent background** 
+- ✅ Integrated new pixel art **Classic style pipes** (top  bottom shared sprite, green)
+- ✅ Tiled and cropped automaticlly to preserve resolution and size
+- ✅ Added toggleable **Dev Debug Mode** using the `D` key
+- ✅ Visualized the car's **collision box** (red outline)
+- ✅ Fine-tuned hitbox for accurate gameplay feel
+- ✅ Refactored draw methods to support `debug_mode` flag cleanly
+- ✅ "DEBUG MODE ON" label in debug mode
+- ✅ Custom **Flapy Bird like skyline background** (blue gradient, 3 tone buidings, clouds)
+
+---
+
+## 🛠 Ongoing Bug Fixes / Improvments
+
+- collision box doesnt match top pipe closely enough ✅
+- 🔧 collision box can be re-shaped to better fit the car sprite(s) - edit pipe pair gen - - func to limit randomness
+- limit max speed
+- try different speed and pipe gaps
+
+---
+
 ## Small Changes BIG Differences
 
 - Tweaked gravity and jump strength
@@ -53,7 +57,5 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 - Tweaked gap size
 - Tweaked pipe size
 - Tweaked car size and resolution
-
 - Added sound!
-
 - Sorted assets into folders
