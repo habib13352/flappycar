@@ -25,7 +25,10 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 
 - ❌ collision box doesnt match top pipe closely enough
 - 🔧 collision box can be re-shaped to better fit the car sprite(s)
-
+- Additionally:
+    - edit pipe pair gen func to limit randomness
+    - limit max speed
+    - try different speed and pipe gaps
 
 ## 🛠 v2.4-dev Progress CHECKLIST
 
