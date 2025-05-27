@@ -73,7 +73,7 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 ---
 
 <details>
-<summary>🚀 **How to Build & Run**</summary>
+<summary>🚀 <strong>How to Build & Run</strong></summary>
 
 To get the game running locally:
 
@@ -83,8 +83,7 @@ To get the game running locally:
 
 ### 📥 Clone the Repository
 ```bash
-git clone https://github.com/your-username/flappycar.git
-cd flappycar
+git clone https://github.com/habib13352/flappycar
 ```
 
 ### 📦 Install Dependencies
