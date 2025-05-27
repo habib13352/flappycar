@@ -7,9 +7,9 @@ FPS = 60
 # Colors
 SKY_BLUE = (135, 206, 250)
 WHITE = (255, 255, 255)
-PIPE_GREEN = (0, 128, 0)
+PIPE_GREEN = (0, 128, 0) #unused?
 LIGHT_GREEN = (144, 238, 144)
-CAR_COLOR = (255, 0, 0) #Red
+CAR_COLOR = (255, 0, 0) #RED
 YELLOW = (255, 255, 0)
 GREY = (50, 50, 50)
 
