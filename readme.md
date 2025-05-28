@@ -5,6 +5,31 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 
 ---
 
+## 🚀 How to Build & Run<
+
+To get the game running locally:
+
+### 🧾 Prerequisites
+- Python 3.7 or later installed
+- Pygame library installed
+
+### 📥 Clone the Repository
+```bash
+git clone https://github.com/habib13352/flappycar
+```
+
+### 📦 Install Dependencies (pygame)
+```bash
+pip install pygame
+```
+
+### ▶️ Run the Game
+```bash
+python main.py
+```
+
+---
+
 ## 🛠 v2.4-dev Progress CHECKLIST
 
 > This section tracks new features and updates added during v2.4 development.
@@ -70,30 +95,3 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 
 </details>
 
----
-
-<details>
-<summary>🚀 <strong>How to Build & Run</strong></summary>
-
-To get the game running locally:
-
-### 🧾 Prerequisites
-- Python 3.7 or later installed
-- Pygame library installed
-
-### 📥 Clone the Repository
-```bash
-git clone https://github.com/habib13352/flappycar
-```
-
-### 📦 Install Dependencies
-```bash
-pip install pygame
-```
-
-### ▶️ Run the Game
-```bash
-python main.py
-```
-
-</details>

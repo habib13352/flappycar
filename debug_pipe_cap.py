@@ -2,7 +2,7 @@ import pygame
 import os
 from core import settings
 
-# ← tweak this to match the PIPE_CAP_HEIGHT you’re trialing in pipe.py
+# tweak this to match the PIPE_CAP_HEIGHT you’re trialing in pipe.py
 CAP_HEIGHT = 32  
 
 def main():
