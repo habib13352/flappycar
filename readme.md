@@ -5,7 +5,7 @@ Built from scratch using **modular Python code** and **Pygame**, this project is
 
 ---
 
-## 🚀 How to Build & Run<
+## 🚀 How to Build & Run
 
 To get the game running locally:
 
