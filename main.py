@@ -3,6 +3,7 @@ from core import settings
 from core.game import Game
 
 # Global toggle for enabling/disabling debug mode
+    # why is this here? where is good mode flag?
 debug_mode = False
 
 # Initialize Pygame and create the main game window
